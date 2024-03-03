@@ -28,11 +28,36 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.countryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.flag {
+  width: 100px;
+  height: 100px;
+}
+.search-bar{
+  padding: 10px;
+  margin-top: 10px;
+  width: 60%}
+
+
+::placeholder{
+  color:black;
 }

@@ -1,23 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [countries, setCountries] = useState([]);
+  const [search, setSearch] = useState("");
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    fetch("https://restcountries.com/v3.1/all")
+      .then((response) => response.json())
+      .then((data) => setCountries(data))
+      .catch((error) => console.error("Error to Fetch the data", error));
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+<div className="App">
+      <input
+        type="text"
+        placeholder="Search for Countries"
+        className="search-bar"
+        onChange={handleSearch}
+        value={search}
+      />
+      <div className="card-container">
+        {countries.map((items) => {
+         const countryName = items.name.common.toLowerCase();
+          const searchName = search.toLowerCase();
+            if(!countryName.includes(searchName) && searchName ){
+              return null;
+            }
+            return (
+          <div key={items.cca3} className="countryCard">
+            <img
+              src={items.flags.png}
+              alt={items.name.common}
+              className="flag"
+            />
+            <h2>{items.name.common}</h2>
+          </div>
+            )
+            })}
+
+      </div>
     </div>
   );
 }
